@@ -13,3 +13,4 @@ for (let index = 0; index < a; index++) {
         P++;
     }
 }
+console.log(String(P));
