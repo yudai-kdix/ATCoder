@@ -18,13 +18,23 @@ public class ABC255B {
                 peopleWhereY[i/2] = sc.nextInt();
             }
         }
+        double[] distance = new double[people];
+        double minDistance = 1000000000;//とりあえず初期化
+        for (int i = 0; i < people; i++) {//iは全員
+            for (int j = 0; j < light; j++) {//jは光持ってる人
+                
+                //距離の計算
+                double tmp = Math.pow(peopleWhereX[i] - peopleWhereX[lightPeople[j]-1],2) + Math.pow(peopleWhereY[i] - peopleWhereY[lightPeople[j]-1],2); 
+                if (tmp < minDistance) {//iの人と一番短い光持ってる人との距離を保存
+                    minDistance = tmp;
+                } 
+            }
+            distance[i] = minDistance;
+        }
         double maxDistance = 0;
-        for (int i = 0; i < light; i++) {//iは光持ってる人の識別
-            for (int j = 0; j < people; j++) {
-                double distance = Math.pow(peopleWhereX[lightPeople[i]-1] - peopleWhereX[j],2) + Math.pow(peopleWhereY[lightPeople[i]-1] - peopleWhereY[j],2);
-                if (maxDistance < distance) {
-                    maxDistance = distance;
-                }
+        for (int i = 0; i < distance.length; i++) {
+            if (maxDistance < distance[i]) {
+                maxDistance = distance[i];
             }
         }
         System.out.println(Math.sqrt(maxDistance));
